@@ -1,4 +1,4 @@
-import json, hashlib, base64
+import json, hashlib, base64, hmac
 from Crypto.Cipher import DES3
 
 
@@ -26,7 +26,7 @@ class Commerce:
         :return: a specific key for the operation
         """
         # create cipher with decrypted secret key
-        decoded_secret_key = base64.b64decode(self.secret_key)
+        decoded_secret_key = base64.standard_b64decode(self.secret_key)
         cipher = DES3.new(decoded_secret_key, DES3.MODE_CBC, IV=b'\0\0\0\0\0\0\0\0')
         # adjust Ds_Merchant_Order size to multiple of 8
         order = order.ljust(16, '\0')
@@ -55,10 +55,12 @@ class Commerce:
         unique_key = self.generate_unique_key(transaction.DS_MERCHANT_ORDER)
 
         plain_text = Ds_MerchantParameters + unique_key
-        sha256 = hashlib.sha256(plain_text)
-        Ds_Signature = base64.b64encode(sha256.digest())
+        sha256 = hashlib.sha256(plain_text).digest()
+        Ds_Signature = base64.b64encode(sha256)
+        Ds_hmac = base64.b64encode(hmac.new(unique_key, Ds_MerchantParameters, hashlib.sha256).digest())
         return {
             'Ds_SignatureVersion': Ds_SignatureVersion,
             'Ds_MerchantParameters': Ds_MerchantParameters,
-            'Ds_Signature': Ds_Signature
+            'Ds_Signature': Ds_Signature,
+            'Ds_hmac': Ds_hmac
         }
