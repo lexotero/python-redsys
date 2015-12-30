@@ -7,6 +7,7 @@ PACKAGES = ['redsys', ]
 setup(
         name='redsys-256',
         description='This package can generate the necessary fields to the Redsys payment form.',
+        keywords='redsys hmac sha256',
         author='Alejandro Otero Ortiz de Cosca',
         author_email='otero.alx@gmail.com',
         url='http://www.aotero.es',
