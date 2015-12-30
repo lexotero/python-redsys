@@ -1,33 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redsys HMAC SHA256</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Redsys HMAC SHA256</title>
+
+	<!-- bootstrap stylesheet -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+	<!-- bootstrap javascript -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+
+	<!-- custom -->
+	<link rel="stylesheet" href="css/doc.css">
 </head>
 <body>
-<h1>redsys-256</h1>
-<p>This package allows to create a Redsys payment form with the new (December 2015) encryption protocol.</p>
+<div class="container">
+	<div class="header clearfix">
+		<nav>
+			<ul class="nav nav-pills pull-xs-right">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">About</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Contact</a>
+				</li>
+			</ul>
+		</nav>
+		<h3 class="text-muted">Python-Redsys</h3>
+	</div>
 
-<h2>Description</h2>
-<p>The containing "redsys" package defines two Python classes:</p>
-<ul>
-    <li>Transaction</li>
-    <li>Commerce</li>
-</ul>
-<p>The first one represents a payment transaction. The second one represents the commerce with its secret key and FUC.</p>
+	<div class="jumbotron">
+		<h1 class="display-3">Python Redsys</h1>
+		<p class="lead">This package allows to create a Redsys payment form with the new (December 2015) encryption protocol.</p>
+		<p><a class="btn btn-lg btn-success" href="https://github.com/lexotero/python-redsys" role="button">Download</a></p>
+	</div>
 
-<h2>Test</h2>
-<p>In order to get the encoded parameters and the signature, you must only:</p>
+	<div class="row">
+		<div class="col-lg-12">
+			<h4>Description</h4>
+			<p>The containing "redsys" package defines two Python classes:</p>
+			<ul>
+				<li>Transaction</li>
+				<li>Commerce</li>
+			</ul>
+			<p>The first one represents a payment transaction. The second one represents the commerce with its secret key and FUC.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h4>How to use</h4>
+			<h5>Install</h5>
+			<code>pip install redsys-256</code>
+			<h5>Test</h5>
+			<p>
+				<code>from redsys import Commerce, Transaction</code>
+			</p>
+			<p>
+				<code>commerce = Commerce(secret_key='YOUR_SECRET_KEY', fuc='YOUR_FUC', terminal='YOUR_TERMINAL', url='NOTIF_URL')</code>
+			</p>
+			<p>
+				<code>transaction = Transaction(amount='100', order'291215112350', url_ok='http://example/ok', url_ko='http://example/ko')</code>
+			</p>
+			<p>
+				<code>commerce.generate_form(transaction)</code>
+			</p>
 
-<span>from redsys import Commerce, Transaction</span>
-<span>c = Commerce(secret_key=YOUR_KEY, fuc=YOUR_MERCHANT_CODE, terminal=TERMINAL, url=A_NOTIFICATION_URL)</span>
-<span>t = Transaction(amount=100, order='301215093032', url_ok='http:/example/ok', url_ko='http://example/ko')</span>
-<span>c.generate_form(t)</span>
+			<p>This will return a dictionary with the Ds_SignatureVersion, Ds_Signature and Ds_MerchantParameters.</p>
+		</div>
+	</div>
 
-<p>This returns a dict with:</p>
-<ul>
-    <li>Ds_SignatureVersion</li>
-    <li>Ds_Signature</li>
-    <li>Ds_MerchantParameters</li>
-</ul>
+	<footer class="footer">
+		<p>© Alejandro Otero Ortiz de Cosca 2015</p>
+	</footer>
+
+</div> <!-- /container -->
 </body>
 </html>
