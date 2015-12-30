@@ -54,10 +54,10 @@ class Commerce:
 
         unique_key = self.generate_unique_key(transaction.DS_MERCHANT_ORDER)
 
-        plain_text = Ds_MerchantParameters + unique_key
-        sha256 = hashlib.sha256(plain_text).digest()
-        Ds_Signature = base64.b64encode(sha256)
-        Ds_hmac = base64.b64encode(hmac.new(unique_key, Ds_MerchantParameters, hashlib.sha256).digest())
+        # plain_text = Ds_MerchantParameters + unique_key
+        # sha256 = hashlib.sha256(plain_text).digest()
+        # Ds_Signature = base64.b64encode(sha256)
+        Ds_Signature = base64.b64encode(hmac.new(unique_key, Ds_MerchantParameters, hashlib.sha256).digest())
         return {
             'Ds_SignatureVersion': Ds_SignatureVersion,
             'Ds_MerchantParameters': Ds_MerchantParameters,
