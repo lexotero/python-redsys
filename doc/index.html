@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redsys HMAC SHA256</title>
+</head>
+<body>
+<h1>redsys-256</h1>
+<p>This package allows to create a Redsys payment form with the new (December 2015) encryption protocol.</p>
+
+<h2>Description</h2>
+<p>The containing "redsys" package defines two Python classes:</p>
+<ul>
+    <li>Transaction</li>
+    <li>Commerce</li>
+</ul>
+<p>The first one represents a payment transaction. The second one represents the commerce with its secret key and FUC.</p>
+
+<h2>Test</h2>
+<p>In order to get the encoded parameters and the signature, you must only:</p>
+
+<span>from redsys import Commerce, Transaction</span>
+<span>c = Commerce(secret_key=YOUR_KEY, fuc=YOUR_MERCHANT_CODE, terminal=TERMINAL, url=A_NOTIFICATION_URL)</span>
+<span>t = Transaction(amount=100, order='301215093032', url_ok='http:/example/ok', url_ko='http://example/ko')</span>
+<span>c.generate_form(t)</span>
+
+<p>This returns a dict with:</p>
+<ul>
+    <li>Ds_SignatureVersion</li>
+    <li>Ds_Signature</li>
+    <li>Ds_MerchantParameters</li>
+</ul>
+</body>
+</html>
