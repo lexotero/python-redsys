@@ -17,6 +17,7 @@ setup(
             'redsys'
         ],
         install_requires=[
+            'Crypto',
             'pycrypto'
         ],
         packages=PACKAGES,
