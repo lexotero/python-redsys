@@ -61,6 +61,5 @@ class Commerce:
         return {
             'Ds_SignatureVersion': Ds_SignatureVersion,
             'Ds_MerchantParameters': Ds_MerchantParameters,
-            'Ds_Signature': Ds_Signature,
-            'Ds_hmac': Ds_hmac
+            'Ds_Signature': Ds_Signature
         }
