@@ -60,7 +60,7 @@ class Commerce:
         parameters = lib.get_decoded_parameters(ds_merchantparameters)
         ds_order = parameters['Ds_Order']
         unique_key = self.generate_unique_key(ds_order)
-        return base64.b64encode(hmac.new(unique_key, json.dumps(parameters), hashlib.sha256).digest())
+        return base64.urlsafe_b64encode(hmac.new(unique_key, ds_merchantparameters, hashlib.sha256).digest())
 
     def is_notification_valid(self, ds_signature, ds_merchantparameters):
         return self.generate_notification_signature(ds_merchantparameters) == ds_signature
