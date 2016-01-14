@@ -1,6 +1,8 @@
 import json, hashlib, base64, hmac
 from Crypto.Cipher import DES3
 
+from redsys import lib
+
 
 class Commerce:
     def __init__(self, secret_key, fuc, terminal, url):
@@ -55,7 +57,7 @@ class Commerce:
         }
 
     def generate_notification_signature(self, ds_merchantparameters):
-        decoded_parameters = base64.b64decode(ds_merchantparameters)
+        decoded_parameters = lib.get_decoded_parameters(ds_merchantparameters)
         parameters = eval(decoded_parameters)
         ds_order = parameters['Ds_Order']
         unique_key = self.generate_unique_key(ds_order)
