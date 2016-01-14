@@ -13,7 +13,7 @@ setup(
         author_email='otero.alx@gmail.com',
         url='http://www.aotero.es',
         download_url="https://github.com/lexotero/python-redsys",
-        version='0.1.5',
+        version='0.1.6',
         license='MIT',
         provides=[
             'redsys'
