@@ -40,7 +40,8 @@ class Commerce:
             'DS_MERCHANT_URLKO': transaction.DS_MERCHANT_URLKO,
             'DS_MERCHANT_MERCHANTCODE': self.fuc,
             'DS_MERCHANT_TERMINAL': self.terminal,
-            'DS_MERCHANT_MERCHANTURL': self.url
+            'DS_MERCHANT_MERCHANTURL': self.url,
+            'DS_MERCHANT_CONSUMERLANGUAGE': transaction.DS_MERCHANT_CONSUMERLANGUAGE
         })
         Ds_MerchantParameters = base64.b64encode(parameters.encode())
 
