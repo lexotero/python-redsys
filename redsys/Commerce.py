@@ -57,8 +57,7 @@ class Commerce:
         }
 
     def generate_notification_signature(self, ds_merchantparameters):
-        decoded_parameters = lib.get_decoded_parameters(ds_merchantparameters)
-        parameters = eval(decoded_parameters)
+        parameters = lib.get_decoded_parameters(ds_merchantparameters)
         ds_order = parameters['Ds_Order']
         unique_key = self.generate_unique_key(ds_order)
         return base64.b64encode(hmac.new(unique_key, json.dumps(parameters), hashlib.sha256).digest())
