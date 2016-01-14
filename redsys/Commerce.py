@@ -53,3 +53,13 @@ class Commerce:
             'Ds_MerchantParameters': Ds_MerchantParameters,
             'Ds_Signature': Ds_Signature
         }
+
+    def generate_notification_signature(self, ds_merchantparameters):
+        decoded_parameters = base64.b64decode(ds_merchantparameters)
+        parameters = eval(decoded_parameters)
+        ds_order = parameters['Ds_Order']
+        unique_key = self.generate_unique_key(ds_order)
+        return base64.b64encode(hmac.new(unique_key, json.dumps(parameters), hashlib.sha256).digest())
+
+    def is_notification_valid(self, ds_signature, ds_merchantparameters):
+        return self.generate_notification_signature(ds_merchantparameters) == ds_signature
