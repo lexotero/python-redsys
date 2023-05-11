@@ -2,5 +2,6 @@
 __pychache__
 *.pyc
 
+.venv
 .python-version
 dist/
