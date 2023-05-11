@@ -21,3 +21,36 @@ mypy = "^1.3.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+mypy_path = "src/"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
+[tool.poe.tasks.lint]
+default_item_type = "cmd"
+ignore_fail = "return_non_zero"
+sequence = [
+    "black --check --verbose .",
+    "isort --check --verbose .",
+    "ruff check .",
+    # Ensuring module paths are correctly idenitifed by MyPy using 
+    # --namespace-packages and --explicit-package-bases.
+    # Note that we are setting 'mypy_path' above.
+    # https://mypy.readthedocs.io/en/stable/running_mypy.html#mapping-file-paths-to-modules
+    "mypy --verbose --namespace-packages --explicit-package-bases .",
+]
+
+[tool.poe.tasks.unit]
+sequence = [
+    { shell = "mkdir -p output" },
+    { shell = "coverage run -m pytest tests/unit --junitxml=output/test-report-unit.xml" },
+]
