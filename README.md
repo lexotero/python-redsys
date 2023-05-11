@@ -1,6 +1,8 @@
-==========
-redsys-256
-==========
+# Redsys Python Library
+
+This is an unofficial Python client library to perform operations against the Redsys payment platform.
+
+This library implements a REST client for the [Resys REST API](https://pagosonline.redsys.es/conexion-rest.html)
 
 This package generate the form parameters for Redsys payment request:
 - Ds_MerchantParameters
